@@ -86,6 +86,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: Dockerfile
+          build-args: |
+            PROXY=${{ secrets.PROXY_NB }}
 
   deploy-to-stage:
     name: Deploy stage environment
