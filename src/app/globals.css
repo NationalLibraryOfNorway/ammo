@@ -31,3 +31,11 @@
     line-height: normal;
     line-break: anywhere;
 }
+
+.header {
+  @apply flex flex-row items-center justify-between p-4;
+}
+
+.button-style {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}

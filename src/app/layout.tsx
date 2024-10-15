@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import {Providers} from '@/app/providers';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'AMMO',
@@ -16,7 +17,17 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body>
         <Providers>
-          {children}
+          <main>
+            <div className="min-h-screen flex flex-col text-center">
+              <Header/>
+              <div className="flex-grow flex justify-center pt-6">
+                {children}
+              </div>
+              <footer className="py-3">
+                <p className="text-sm ">Nasjonalbiblioteket &copy; 2024</p>
+              </footer>
+            </div>
+          </main>
         </Providers>
       </body>
     </html>
