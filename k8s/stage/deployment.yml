@@ -17,8 +17,14 @@ spec:
     spec:
       containers:
         - name: ammo
-          image: harbor.nb.no/tekst/ammo:<version>
+          image: <image>
           ports:
             - name: app-port
               containerPort: 3000
           imagePullPolicy: Always
+          env:
+            - name: IMAGE_API_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: image_api_path
