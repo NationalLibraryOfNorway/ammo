@@ -1,9 +1,9 @@
-import type {Metadata} from "next";
-import "./globals.css";
+import type {Metadata} from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "AMMO",
-  description: "Alt Mulig-MOttak",
+  title: 'AMMO',
+  description: 'Alt Mulig-MOttak',
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 export interface Item {
-    id: string;
-    thumbnail: string;
-    image: string;
+  id: string;
+  thumbnail: string;
+  image: string;
 }
