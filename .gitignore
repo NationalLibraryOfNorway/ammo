@@ -37,3 +37,6 @@ next-env.d.ts
 
 # IDE
 /.idea
+
+# local dev files
+dummy-data.json
