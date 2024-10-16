@@ -10,7 +10,6 @@ const itemList: string[] = [
   'finansavisen_null_null_20241012_33_238_1',
   'aftenposten_null_null_20241013_165_278_1',
   'fjordenestidende_null_null_20241010_114_39_1',
-  'fjordenestidende_null_null_20241010_114_39_1',
   'bergensavisen_null_null_20241013_0_278_1',
   'harstadtidende_null_null_20241010_138_236_1',
   'gjengangeren_null_null_20241012_0_0_1',

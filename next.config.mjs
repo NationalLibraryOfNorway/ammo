@@ -6,6 +6,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
+                // TODO: Temporary remote pattern. Change when we have decided where to retrieve images from.
                 hostname: 'www.nb.no',
                 port: '',
                 pathname: '/services/image/resolver/**'
