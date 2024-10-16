@@ -1,10 +1,10 @@
 interface ProblemDetail {
-    type: string;
-    title: string;
-    status: number;
-    detail: string;
-    instance: string;
-    timestamp: string;
+  type: string;
+  title: string;
+  status: number;
+  detail: string;
+  instance: string;
+  timestamp: string;
 }
 
 export type { ProblemDetail };
