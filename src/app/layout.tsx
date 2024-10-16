@@ -20,11 +20,11 @@ export default function RootLayout({
           <main>
             <div className="min-h-screen flex flex-col text-center">
               <Header/>
-              <div className="flex-grow flex justify-center pt-6">
+              <div className="flex justify-center pt-6">
                 {children}
               </div>
-              <footer className="py-3">
-                <p className="text-sm ">Nasjonalbiblioteket &copy; 2024</p>
+              <footer className="flex-grow py-3 flex justify-center items-end">
+                <p className="text-sm">Nasjonalbiblioteket &copy; 2024</p>
               </footer>
             </div>
           </main>
