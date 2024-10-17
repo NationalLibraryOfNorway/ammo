@@ -1,15 +1,19 @@
 import {useAuth} from '@/app/AuthProvider';
+import {Button} from '@nextui-org/button';
+import {LuLogOut} from 'react-icons/lu';
 
 const LogoutButton = () => {
   const { logout } = useAuth();
 
   return (
-    <button
-      className='button-style'
+    <Button
+      color="primary"
+      variant="light"
+      endContent={<LuLogOut size={25} />}
       onClick={logout}
     >
       Logg ut
-    </button>
+    </Button>
   );
 };
 
