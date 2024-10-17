@@ -12,14 +12,19 @@ import {LuMoon, LuSun} from 'react-icons/lu';
 export default function Header() {
   const { authenticated , user } = useAuth();
   const router = useRouter();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>();
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme as 'light' | 'dark');
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    }
   }, [theme]);
 
   const toggleTheme = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
 
   return (
