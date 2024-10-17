@@ -1,7 +1,6 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {ItemImage} from '@/models/ItemImage';
 import {approveItem, getItemImage, getItemMetadata} from '@/services/item.data';
 import {Spinner} from '@nextui-org/spinner';
 import NextImage from 'next/image';

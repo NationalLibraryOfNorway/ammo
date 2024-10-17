@@ -1,7 +1,6 @@
 import {NextResponse} from 'next/server';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {TextItem} from '@/models/TextItem';
-import {ItemImage} from '@/models/ItemImage';
 
 export async function getAllItems(): Promise<NextResponse> {
   return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/items`, {
