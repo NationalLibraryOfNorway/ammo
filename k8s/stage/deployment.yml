@@ -23,6 +23,26 @@ spec:
               containerPort: 3000
           imagePullPolicy: Always
           env:
+            - name: NEXT_PUBLIC_KEYCLOAK_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: keycloak_base_url
+            - name: NEXT_PUBLIC_KEYCLOAK_REALM
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: keycloak_realm
+            - name: NEXT_PUBLIC_KEYCLOAK_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: keycloak_client_id
+            - name: AUTH_API_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: auth_api_path
             - name: IMAGE_API_PATH
               valueFrom:
                 secretKeyRef:
