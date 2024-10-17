@@ -23,13 +23,7 @@ export async function getAllItems(): Promise<NextResponse> {
 
 export function getItemImage(id: string): Promise<NextResponse> {
   const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_URL;
-
-  const dummyItem: ItemImage = {
-    id,
-    thumbnail: `${baseLink}${id}-1_001_hovedavis/full/0,200/0/native.jpg`,
-    image: `${baseLink}${id}-1_001_hovedavis/full/full/0/native.jpg`
-  };
-  return Promise.resolve(NextResponse.json(dummyItem, {status: 200}));
+  return Promise.resolve(NextResponse.json(`${baseLink}${id}-1_001_hovedavis/full/full/0/native.jpg`, {status: 200}));
 }
 
 export async function getItemMetadata(id: string): Promise<NextResponse> {

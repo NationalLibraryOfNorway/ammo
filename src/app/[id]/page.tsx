@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import {ItemImage} from '@/models/ItemImage';
-import {approveItem, getItemImage as getSingleItem, getItemMetadata} from '@/services/item.data';
+import {approveItem, getItemImage, getItemMetadata} from '@/services/item.data';
 import {Spinner} from '@nextui-org/spinner';
 import NextImage from 'next/image';
 import {CalendarDate, DateInput, Image} from '@nextui-org/react';
@@ -22,7 +22,7 @@ interface NewspaperFormInput {
 
 export default function Page({params}: { params: { id: string } }) {
   const { register, handleSubmit, control, formState: {errors} } = useForm<NewspaperFormInput>();
-  const [item, setItem] = useState<ItemImage>();
+  const [imageSrc, setImageSrc] = useState<string>();
   const [extractedMetadata, setExtractedMetadata] = useState<NewspaperMetadata>();
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,9 +53,9 @@ export default function Page({params}: { params: { id: string } }) {
 
   useEffect(() => {
     const getItem = async () => {
-      await getSingleItem(params.id).then(async res => {
-        const data = await res.json() as ItemImage;
-        setItem(data);
+      await getItemImage(params.id).then(async res => {
+        const data = await res.json() as string;
+        setImageSrc(data);
       });
       await getItemMetadata(params.id).then(async res => {
         const data = await res.json() as NewspaperMetadata;
@@ -76,10 +76,10 @@ export default function Page({params}: { params: { id: string } }) {
       { loading ?
         <Spinner /> :
         <>
-          { item && extractedMetadata &&
+          { imageSrc && extractedMetadata &&
             <div className="flex items-center">
               <div className="image-container">
-                <Image as={NextImage} layout="fill" className="image" src={item.image} alt="Bilde"/>
+                <Image as={NextImage} layout="fill" className="image" src={imageSrc} alt="Bilde"/>
               </div>
               <div className="px-2.5">
                 <form onSubmit={() => void handleSubmit(onSubmit)()} className="flex flex-col gap-4">
