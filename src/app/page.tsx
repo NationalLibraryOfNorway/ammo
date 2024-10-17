@@ -30,7 +30,8 @@ export default function Home() {
           {items.map(item => (
             <ItemThumbnail key={item.id} item={item} />
           ))}
-        </> }
+        </>
+      }
     </div>
   );
 }
