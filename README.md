@@ -14,6 +14,7 @@ cp .env.example .env.local
 | NEXT_PUBLIC_KEYCLOAK_REALM     | _N/A_         | Keycloak-realmen             |
 | NEXT_PUBLIC_KEYCLOAK_CLIENT_ID | _N/A_         | Keycloak-klienten            |
 | AUTH_API_PATH                  | _N/A_         | Sti til autentiserings-APIet |
+| IMAGE_API_URL                  | _N/A_         | Sti til bilde-APIet          |
 
 Deretter må du kjøre følgende kommandoer:
 ```bash
