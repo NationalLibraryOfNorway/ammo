@@ -1,8 +1,8 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {Item} from '@/models/Item';
-import {approveItem, getItem as getSingleItem, getItemMetadata} from '@/services/item.data';
+import {ItemImage} from '@/models/ItemImage';
+import {approveItem, getItemImage as getSingleItem, getItemMetadata} from '@/services/item.data';
 import {Spinner} from '@nextui-org/spinner';
 import NextImage from 'next/image';
 import {CalendarDate, DateInput, Image} from '@nextui-org/react';
@@ -22,8 +22,8 @@ interface NewspaperFormInput {
 
 export default function Page({params}: { params: { id: string } }) {
   const { register, handleSubmit, control, formState: {errors} } = useForm<NewspaperFormInput>();
-  const [item, setItem] = useState<Item>();
-  const [generatedMetadata, setGeneratedMetadata] = useState<NewspaperMetadata>();
+  const [item, setItem] = useState<ItemImage>();
+  const [extractedMetadata, setExtractedMetadata] = useState<NewspaperMetadata>();
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
@@ -54,12 +54,12 @@ export default function Page({params}: { params: { id: string } }) {
   useEffect(() => {
     const getItem = async () => {
       await getSingleItem(params.id).then(async res => {
-        const data = await res.json() as Item;
+        const data = await res.json() as ItemImage;
         setItem(data);
       });
       await getItemMetadata(params.id).then(async res => {
         const data = await res.json() as NewspaperMetadata;
-        setGeneratedMetadata(data);
+        setExtractedMetadata(data);
         setLoading(false);
       });
     };
@@ -76,13 +76,12 @@ export default function Page({params}: { params: { id: string } }) {
       { loading ?
         <Spinner /> :
         <>
-          { item && generatedMetadata &&
+          { item && extractedMetadata &&
             <div className="flex items-center">
               <div className="image-container">
                 <Image as={NextImage} layout="fill" className="image" src={item.image} alt="Bilde"/>
               </div>
               <div className="px-2.5">
-                <h1>{item.id}</h1>
                 <form onSubmit={() => void handleSubmit(onSubmit)()} className="flex flex-col gap-4">
                   <Input
                     type="text"
@@ -90,7 +89,7 @@ export default function Page({params}: { params: { id: string } }) {
                     variant={'bordered'}
                     {...register('title', { required: 'Tittel er et påkrevd felt' })}
                     placeholder="Skriv inn tittel på avisen"
-                    defaultValue={generatedMetadata.title}
+                    defaultValue={extractedMetadata.title}
                     isInvalid={!!errors.title}
                     errorMessage={errors.title?.message}
                   />
@@ -102,7 +101,7 @@ export default function Page({params}: { params: { id: string } }) {
                         ? 'Datoen kan ikke være i fremtiden'
                         : true;
                     } } }}
-                    defaultValue={dateValue(new Date(generatedMetadata.date))}
+                    defaultValue={dateValue(new Date(extractedMetadata.date))}
                     render={({ field }) => (
                       <DateInput
                         {...field}
@@ -120,14 +119,14 @@ export default function Page({params}: { params: { id: string } }) {
                     label="Nummer"
                     variant={'bordered'}
                     {...register('editionNumber')}
-                    defaultValue={generatedMetadata.editionNumber}
+                    defaultValue={extractedMetadata.editionNumber}
                   />
                   <Input
                     type="text"
                     label="Årgang"
                     variant={'bordered'}
                     {...register('volume')}
-                    defaultValue={generatedMetadata.volume}
+                    defaultValue={extractedMetadata.volume}
                   />
                   <Button
                     color={!isSubmitting ? 'primary' : 'default'} onClick={() => void handleSubmit(onSubmit)()}

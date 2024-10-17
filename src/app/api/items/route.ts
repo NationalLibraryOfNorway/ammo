@@ -1,5 +1,5 @@
 import {NextResponse} from 'next/server';
-import {Item} from '@/models/Item';
+import {ItemImage} from '@/models/ItemImage';
 
 const itemList: string[] = [
   'dagbladet_null_null_20240827_156_198_1',
@@ -19,13 +19,13 @@ const itemList: string[] = [
   'klassekampen_null_null_20241012_56_238_1'
 ];
 
-const baseLink = process.env.IMAGE_API_URL;
+const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_URL;
 
 // GET /api/items
 // eslint-disable-next-line
 export async function GET(): Promise<NextResponse> {
   // TODO: Replace with actual data once in place
-  const data: Item[] = [];
+  const data: ItemImage[] = [];
   itemList.forEach(id => {
     data.push({
       id,

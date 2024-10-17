@@ -1,8 +1,8 @@
-import {Item} from '@/models/Item';
+import {ItemImage} from '@/models/ItemImage';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function ItemThumbnail(props: {item: Item}) {
+export default function ItemThumbnail(props: {item: ItemImage}) {
   return (
     <Link href={`/${props.item.id}`} key={props.item.id}>
       <div className="thumbnail-item" >
