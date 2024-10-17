@@ -28,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar maxWidth='xl'>
+    <Navbar maxWidth='xl' className="sticky top-0">
       <NavbarBrand>
         <Link
           color="foreground"
