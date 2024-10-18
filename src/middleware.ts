@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from 'next/server';
 import {getUserToken} from '@/utils/cookieUtils';
 import {UserToken} from '@/models/UserToken';
 
-const protectedPaths: string[] = [];
+const protectedPaths: string[] = ['/api/items'];
 const requiredRoles = ['T_relation_avis']; // TODO: Fiks rolle når den er opprettet
 
 export default function middleware(req: NextRequest) {
