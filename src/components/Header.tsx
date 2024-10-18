@@ -43,7 +43,7 @@ export default function Header() {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem className="lg:flex">
+        <NavbarItem className="lg:flex items-center">
           <Switch
             defaultSelected
             size="lg"
