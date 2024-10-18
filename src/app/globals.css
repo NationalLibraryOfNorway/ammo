@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 .thumbnail-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 0.5rem;
-    width: 60%
+    @apply flex flex-wrap lg:justify-start justify-center lg:w-2/3 w-full;
 }
 
 .thumbnail-item {
