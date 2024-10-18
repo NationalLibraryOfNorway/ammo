@@ -8,11 +8,15 @@ import {useAuth} from '@/app/AuthProvider';
 import {UserDetails} from '@/components/UserDetails';
 import {Switch} from '@nextui-org/switch';
 import {LuMoon, LuSun} from 'react-icons/lu';
+import {Anta} from 'next/font/google';
+
+const logoFont = Anta({ weight: ['400'], subsets: ['latin'] });
 
 export default function Header() {
   const { authenticated , user } = useAuth();
   const router = useRouter();
   const [theme, setTheme] = useState<'light' | 'dark'>();
+
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -28,11 +32,11 @@ export default function Header() {
   };
 
   return (
-    <Navbar maxWidth='xl' className="sticky top-0">
+    <Navbar maxWidth='xl' className="sticky top-0 font-mono">
       <NavbarBrand>
         <Link
           color="foreground"
-          className="font-bold text-2xl hover:cursor-pointer"
+          className={`font-bold text-3xl hover:cursor-pointer ${logoFont.className}`}
           onClick={() => router.push('/')}
         >
           AMMO
