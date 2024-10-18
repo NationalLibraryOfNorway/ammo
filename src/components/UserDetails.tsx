@@ -17,7 +17,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({ name, className }) => 
   }, [name]);
 
   return (
-    <div className={className}>
+    <div className={`flex items-center ${className}`}>
       <User
         name={name}
         avatarProps={{
