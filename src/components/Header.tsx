@@ -43,7 +43,7 @@ export default function Header() {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem className="lg:flex items-center">
+        <NavbarItem className="flex items-center">
           <Switch
             defaultSelected
             size="lg"
@@ -60,8 +60,8 @@ export default function Header() {
           />
           { authenticated ? (
             <>
-              <UserDetails name={user?.name ?? ''} className="px-2.5"/>
-              <LogoutButton/>
+              <UserDetails name={user?.name ?? ''}/>
+              <LogoutButton className="pl-2.5"/>
             </>
           ) : <></>}
         </NavbarItem>
