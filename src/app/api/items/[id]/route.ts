@@ -10,7 +10,8 @@ export async function GET(req: NextRequest, params: IdParams): Promise<NextRespo
   const dummyItem: TextItem = {
     id: params.params.id,
     extractedMetadata: {
-      title: 'Dagbladet',
+      title: 'Dagbladet (Oslo: 1869-)',
+      titleId: '1600000882',
       date: '2024-08-27',
       editionNumber: '195',
       volume: '154'

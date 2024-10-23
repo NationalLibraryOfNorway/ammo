@@ -8,7 +8,7 @@ export function Providers({children}: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       <React.StrictMode>
-        <NextUIProvider>
+        <NextUIProvider locale='nb-NO'>
           {children}
         </NextUIProvider>
       </React.StrictMode>

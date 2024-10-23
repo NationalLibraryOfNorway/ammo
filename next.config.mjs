@@ -3,6 +3,15 @@ const nextConfig = {
     reactStrictMode: false,
     output: "standalone",
     basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+    async rewrites() {
+        return [
+            {
+                source: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/catalog/:path*`,
+                destination: `${process.env.CATALOGUE_API_PATH}/:path*`,
+                basePath: false
+            }
+        ];
+    },
     images: {
         remotePatterns: [
             {
