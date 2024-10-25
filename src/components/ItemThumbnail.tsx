@@ -15,8 +15,8 @@ export default function ItemThumbnail(props: {item: ItemImage; onItemClick: (id:
             className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-60 cursor-default">
             <LuLock size={64} className="text-white"/>
           </div>)}
-        <p className="thumbnail-text">{props.item.id}</p>
       </div>
+      <p className="thumbnail-text">{props.item.id}</p>
     </div>
   );
 }
