@@ -4,7 +4,7 @@ import {Key, useEffect, useState} from 'react';
 import {approveItem, getItemImage, getItemMetadata} from '@/services/item.data';
 import {Spinner} from '@nextui-org/spinner';
 import NextImage from 'next/image';
-import {CalendarDate, DateInput, Image} from '@nextui-org/react';
+import {CalendarDate, DatePicker, Image} from '@nextui-org/react';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {Input} from '@nextui-org/input';
 import {Button} from '@nextui-org/button';
@@ -196,7 +196,7 @@ export default function Page({params}: { params: { id: string } }) {
                     }}
                     defaultValue={dateValue(new Date(extractedMetadata.date))}
                     render={({field}) => (
-                      <DateInput
+                      <DatePicker
                         {...field}
                         value={field.value}
                         onChange={e => field.onChange(e)}
