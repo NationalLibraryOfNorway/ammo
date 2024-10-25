@@ -76,7 +76,7 @@ export default function Home() {
             <ItemThumbnail
               key={item.id}
               item={item}
-              onItemClick={id => handleItemClicked(id)}
+              onItemClick={id => void handleItemClicked(id)}
               locked={isItemLockedForUser(item.lock)}
             />
           ))}
