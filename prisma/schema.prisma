@@ -1,0 +1,13 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../db/ammo.db"
+}
+
+model ItemLock {
+  itemId   String @id
+  username String
+}
