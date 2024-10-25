@@ -36,7 +36,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 }
 
 // DELETE an item lock: DELETE /api/lock/:lockId
-export async function DELETE(params: IdParams): Promise<NextResponse> {
+export async function DELETE(req: NextRequest, params: IdParams): Promise<NextResponse> {
   const exists = await doesLockExist(params.params.itemId);
 
   if (!exists) {
