@@ -29,9 +29,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
   });
 
-  // If the item is already locked, return a 409 Conflict
-  console.log('POST /api/lock RESPONSE', item);
-
   return NextResponse.json(item, {status: 201});
 }
 

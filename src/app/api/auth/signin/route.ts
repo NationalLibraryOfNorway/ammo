@@ -38,6 +38,6 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
   setUserCookie(userToken);
 
-  const user: User = {name: userToken.name, expires: userToken.expires};
+  const user: User = {name: userToken.name, expires: userToken.expires, username: userToken.username};
   return NextResponse.json(user, {status: 200});
 }

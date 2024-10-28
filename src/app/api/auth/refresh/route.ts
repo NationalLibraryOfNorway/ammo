@@ -25,6 +25,6 @@ export async function POST(): Promise<NextResponse> {
 
   setUserCookie(newToken);
 
-  const user: User = {name: newToken.name, expires: newToken.expires};
+  const user: User = {name: newToken.name, expires: newToken.expires, username: newToken.username};
   return NextResponse.json(user, {status: 200});
 }

@@ -50,7 +50,7 @@ export default function Home() {
     if (!user) {
       return Promise.reject(new Error('User not authenticated'));
     }
-    await lockItem(id, user?.name).then(res => {
+    await lockItem(id, user?.username).then(res => {
       if (res.status === 201) {
         router.push(`/${id}`);
         alert('Item locked');
@@ -61,10 +61,7 @@ export default function Home() {
   };
 
   const isItemLockedForUser = (lock?: ItemLock): boolean => {
-    if (!lock) {
-      return false;
-    }
-    return lock.username === user?.name;
+    return lock !== undefined && lock?.username !== user?.username;
   };
 
   return (
