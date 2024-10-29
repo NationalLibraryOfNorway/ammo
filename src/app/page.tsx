@@ -53,7 +53,6 @@ export default function Home() {
     await lockItem(id, user?.username).then(res => {
       if (res.status === 201) {
         router.push(`/${id}`);
-        alert('Item locked');
       } else {
         alert('Could not lock item');
       }
