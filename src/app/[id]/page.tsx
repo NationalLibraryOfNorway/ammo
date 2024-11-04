@@ -90,10 +90,10 @@ export default function Page({params}: { params: { id: string } }) {
   };
 
   const onSelectionChange = (key: Key | null) => {
-    const selectedTitle = titles.items.find(title => title.catalogueId === key);
+    const selectedTitle = titles.items.find(title => title.catalogId === key);
     if (selectedTitle) {
       setValue('title', selectedTitle.name);
-      setValue('titleId', selectedTitle.catalogueId);
+      setValue('titleId', selectedTitle.catalogId);
     }
   };
 
@@ -126,11 +126,11 @@ export default function Page({params}: { params: { id: string } }) {
                   >
                     {item => (
                       <AutocompleteItem
-                        key={item.catalogueId}
+                        key={item.catalogId}
                         textValue={item.name}
                         endContent={
                           <div className="text-xs text-gray-500">
-                            {item.catalogueId}
+                            {item.catalogId}
                           </div>
                         }
                       >

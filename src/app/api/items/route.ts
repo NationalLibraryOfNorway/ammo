@@ -19,7 +19,7 @@ const itemList: string[] = [
   'klassekampen_null_null_20241012_56_238_1'
 ];
 
-const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_URL;
+const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_PATH;
 
 // GET /api/items
 // eslint-disable-next-line

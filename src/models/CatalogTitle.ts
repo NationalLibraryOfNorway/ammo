@@ -1,5 +1,5 @@
 export interface CatalogTitle {
-  catalogueId: string;
+  catalogId: string;
   name: string;
   startDate?: string;
   endDate?: string;

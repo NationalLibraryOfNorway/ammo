@@ -7,7 +7,7 @@ const nextConfig = {
         return [
             {
                 source: `${process.env.NEXT_PUBLIC_BASE_PATH}/api/catalog/:path*`,
-                destination: `${process.env.CATALOGUE_API_PATH}/:path*`,
+                destination: `${process.env.CATALOG_API_PATH}/:path*`,
                 basePath: false
             }
         ];

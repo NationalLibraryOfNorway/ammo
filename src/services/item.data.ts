@@ -21,7 +21,7 @@ export async function getAllItems(): Promise<NextResponse> {
 }
 
 export function getItemImage(id: string): Promise<NextResponse> {
-  const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_URL;
+  const baseLink = process.env.NEXT_PUBLIC_IMAGE_API_PATH;
   return Promise.resolve(NextResponse.json(`${baseLink}${id}-1_001_hovedavis/full/full/0/native.jpg`, {status: 200}));
 }
 
