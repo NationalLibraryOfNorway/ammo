@@ -38,13 +38,18 @@ spec:
                 secretKeyRef:
                   name: ammo-secrets
                   key: keycloak_client_id
+            - name: NEXT_PUBLIC_IMAGE_API_PATH
+              valueFrom:
+                secretKeyRef:
+                  name: ammo-secrets
+                  key: image_api_path
             - name: AUTH_API_PATH
               valueFrom:
                 secretKeyRef:
                   name: ammo-secrets
                   key: auth_api_path
-            - name: IMAGE_API_PATH
+            - name: CATALOGUE_API_PATH
               valueFrom:
                 secretKeyRef:
                   name: ammo-secrets
-                  key: image_api_path
+                  key: catalogue_api_path
