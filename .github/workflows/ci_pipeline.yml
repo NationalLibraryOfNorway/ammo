@@ -73,13 +73,13 @@ jobs:
 
       - name: Set .env variables
         run: |
-          touch .env
-          echo "NEXT_PUBLIC_IMAGE_API_PATH=${{ steps.import-secrets.outputs.IMAGE_API_PATH }}" >> .env
-          echo "NEXT_PUBLIC_KEYCLOAK_BASE_URL=${{ steps.import-secrets.outputs.KEYCLOAK_BASE_URL }}" >> .env
-          echo "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=${{ steps.import-secrets.outputs.KEYCLOAK_CLIENT_ID }}" >> .env
-          echo "NEXT_PUBLIC_KEYCLOAK_REALM=${{ steps.import-secrets.outputs.KEYCLOAK_REALM }}" >> .env
-          echo "AUTH_API_PATH=${{ steps.import-secrets.outputs.AUTH_API_PATH }}" >> .env
-          echo "CATALOG_API_PATH=${{ steps.import-secrets.outputs.CATALOG_API_PATH }}" >> .env
+          touch .env.production
+          echo "NEXT_PUBLIC_IMAGE_API_PATH=${{ steps.import-secrets.outputs.IMAGE_API_PATH }}" >> .env.production
+          echo "NEXT_PUBLIC_KEYCLOAK_BASE_URL=${{ steps.import-secrets.outputs.KEYCLOAK_BASE_URL }}" >> .env.production
+          echo "NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=${{ steps.import-secrets.outputs.KEYCLOAK_CLIENT_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_KEYCLOAK_REALM=${{ steps.import-secrets.outputs.KEYCLOAK_REALM }}" >> .env.production
+          echo "AUTH_API_PATH=${{ steps.import-secrets.outputs.AUTH_API_PATH }}" >> .env.production
+          echo "CATALOG_API_PATH=${{ steps.import-secrets.outputs.CATALOG_API_PATH }}" >> .env.production
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
