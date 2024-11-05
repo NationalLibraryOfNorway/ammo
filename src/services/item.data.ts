@@ -1,22 +1,20 @@
 import {NextResponse} from 'next/server';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {TextItem} from '@/models/TextItem';
+import {ItemImage} from '@/models/ItemImage';
 
-export async function getAllItems(): Promise<NextResponse> {
+export async function getAllItems(): Promise<ItemImage[]> {
   return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/items`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   })
-    .then(async response => {
-      if (!response.ok) {
-        return NextResponse.json({error: 'Failed to fetch items'}, {status: response.status});
+    .then(response => {
+      if (response.ok) {
+        return response.json() as Promise<ItemImage[]>;
       }
-      return NextResponse.json(await response.json(), {status: 200});
-    })
-    .catch((e: Error) => {
-      return NextResponse.json({error: `Failed to fetch items: ${e.message}`}, {status: 500});
+      return Promise.reject(new Error('Failed to fetch items'));
     });
 }
 

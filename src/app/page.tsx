@@ -11,11 +11,13 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   const getItems = async () => {
-    await getAllItems().then(async res => {
-      const data = await res.json() as ItemImage[];
-      setItems(data);
-      setLoading(false);
-    });
+    const data = await getAllItems()
+      .catch((e: Error) => {
+        console.error(`Error when fetching items: ${e.message}`);
+        return [];
+      });
+    setItems(data);
+    setLoading(false);
   };
 
   useEffect(() => {
