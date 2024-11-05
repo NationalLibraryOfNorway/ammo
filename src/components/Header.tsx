@@ -10,7 +10,7 @@ import {Switch} from '@nextui-org/switch';
 import {LuMoon, LuSun} from 'react-icons/lu';
 import {Anta} from 'next/font/google';
 
-const logoFont = Anta({ weight: ['400'], subsets: ['latin'] });
+const logoFont = Anta({ weight: ['400'], subsets: ['latin'], display: 'swap', adjustFontFallback: false });
 
 export default function Header() {
   const { authenticated , user } = useAuth();
