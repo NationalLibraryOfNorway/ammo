@@ -10,7 +10,7 @@ export default function Logo(props: { className: string; appearance: 'light' | '
       viewBox="0 0 283.692 69.435"
       xmlns="http://www.w3.org/2000/svg"
       className={props.className}>
-      <g id="svgGroup" stroke-linecap="round" fill-rule="evenodd" font-size="9pt" stroke="#000" stroke-width="0"
+      <g id="svgGroup" fillRule="evenodd" fontSize="9pt"
         fill={ color }
       >
         <path
@@ -32,7 +32,7 @@ export default function Logo(props: { className: string; appearance: 'light' | '
           19.483 A 8.353 8.353 0 0 0 270.728 13.308 A 11.24 11.24 0 0 0 270.361 12.965 Q 267.334 10.255 262.988 10.255
           L 246.729 10.255 A 11.324 11.324 0 0 0 242.458 11.042 A 10.554 10.554 0 0 0 239.38 12.965 A 9.485 9.485 0 0 0
           237.321 15.496 A 8.172 8.172 0 0 0 236.328 19.483 Z"
-          vector-effect="non-scaling-stroke"/>
+          vectorEffect="non-scaling-stroke"/>
       </g>
     </svg>
   );
