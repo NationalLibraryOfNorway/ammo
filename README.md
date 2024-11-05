@@ -13,9 +13,9 @@ cp .env.example .env.local
 | NEXT_PUBLIC_KEYCLOAK_BASE_URL  | _N/A_                        | URL til keycloak                                                                                                         |
 | NEXT_PUBLIC_KEYCLOAK_REALM     | _N/A_                        | Keycloak-realmen                                                                                                         |
 | NEXT_PUBLIC_KEYCLOAK_CLIENT_ID | _N/A_                        | Keycloak-klienten                                                                                                        |
-| NEXT_PUBLIC_IMAGE_API_URL      | _N/A_                        | Sti til bilde-APIet                                                                                                      |
+| NEXT_PUBLIC_IMAGE_API_PATH     | _N/A_                        | Sti til bilde-APIet                                                                                                      |
 | AUTH_API_PATH                  | _N/A_                        | Sti til autentiserings-APIet                                                                                             |
-| CATALOGUE_API_PATH             | http://localhost:8087/bikube | Sti til [katalog APIet ](https://github.com/NationalLibraryOfNorway/bikube)<br/>Må starte med `http://` eller `https://` |
+| CATALOG_API_PATH               | http://localhost:8087/bikube | Sti til [katalog APIet ](https://github.com/NationalLibraryOfNorway/bikube)<br/>Må starte med `http://` eller `https://` |
 
 Deretter må du kjøre følgende kommandoer:
 ```bash

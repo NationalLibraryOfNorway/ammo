@@ -124,7 +124,7 @@ export default function Page({params}: { params: { id: string } }) {
                     allowsEmptyCollection={false}
                     allowsCustomValue={true}
                   >
-                    {item => (
+                    { item => (
                       <AutocompleteItem
                         key={item.catalogueId}
                         textValue={item.name}

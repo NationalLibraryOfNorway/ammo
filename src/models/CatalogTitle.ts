@@ -1,5 +1,5 @@
 export interface CatalogTitle {
-  catalogueId: string;
+  catalogueId: string; // Must match spelling of obj from REST API, therefore not catalogId
   name: string;
   startDate?: string;
   endDate?: string;
