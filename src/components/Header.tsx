@@ -36,7 +36,7 @@ export default function Header() {
           className={'font-bold text-3xl hover:cursor-pointer'}
           onClick={() => router.push('/')}
         >
-          <Logo className={'max-w-32'} appearance={theme ?? 'light'} />
+          <Logo className={'max-w-28'} appearance={theme ?? 'light'} />
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
