@@ -16,30 +16,27 @@ export default function Home() {
   const {user} = useAuth();
 
   const getItems = async () => {
-    // const data = await getAllItems()
-    //   .catch((e: Error) => {
-    //     console.error(`Error when fetching items: ${e.message}`);
-    //     return [];
-    //   });
-    // setItems(data);
-    // setLoading(false);
-    await getAllItems().then(async res => {
-      const data = await res.json() as Item[];
-      setItems(data);
-      return data;
-    })
-      .then(async data => {
+    await getAllItems()
+      .then((res: ItemImage[]) => {
+        setItems(res);
+        return res;
+      })
+      .then(async fetchedItems => {
         await getAllLocks().then(async res => {
           const locks = await res.json() as {itemId: string; username: string}[];
 
-          const newItems = data.map(item => {
+          const newItems = fetchedItems.map(item => {
             const lock = locks.find(l => l.itemId === item.id);
             return {...item, lock};
           });
           setItems(newItems);
         });
       })
-      .then(() => setLoading(false));
+      .catch((e: Error) => {
+        console.error(`Error when fetching items: ${e.message}`);
+        return [];
+      });
+    setLoading(false);
   };
 
   useEffect(() => {
