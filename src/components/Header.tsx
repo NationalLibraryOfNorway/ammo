@@ -8,15 +8,12 @@ import {useAuth} from '@/app/AuthProvider';
 import {UserDetails} from '@/components/UserDetails';
 import {Switch} from '@nextui-org/switch';
 import {LuMoon, LuSun} from 'react-icons/lu';
-import {Anta} from 'next/font/google';
-
-const logoFont = Anta({ weight: ['400'], subsets: ['latin'], display: 'swap', adjustFontFallback: false });
+import Logo from '@/components/Logo';
 
 export default function Header() {
   const { authenticated , user } = useAuth();
   const router = useRouter();
   const [theme, setTheme] = useState<'light' | 'dark'>();
-
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
@@ -36,10 +33,10 @@ export default function Header() {
       <NavbarBrand>
         <Link
           color="foreground"
-          className={`font-bold text-3xl hover:cursor-pointer ${logoFont.className}`}
+          className={'font-bold text-3xl hover:cursor-pointer'}
           onClick={() => router.push('/')}
         >
-          AMMO
+          <Logo className={'max-w-28'} appearance={theme ?? 'light'} />
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">

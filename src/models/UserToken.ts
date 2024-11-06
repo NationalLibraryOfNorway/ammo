@@ -1,6 +1,7 @@
 interface SerializedUserToken {
   groups: string[];
   name: string;
+  username: string;
   accessToken: string;
   expires: string;
   refreshToken: string;
@@ -10,6 +11,7 @@ interface SerializedUserToken {
 interface UserToken {
   groups: string[];
   name: string;
+  username: string;
   accessToken: string;
   expires: Date;
   refreshToken: string;
@@ -20,6 +22,7 @@ const userTokenBuilder = (userToken: SerializedUserToken): UserToken => {
   return {
     groups: userToken.groups,
     name: userToken.name,
+    username: userToken.username,
     accessToken: userToken.accessToken,
     expires: new Date(userToken.expires),
     refreshToken: userToken.refreshToken,
@@ -29,6 +32,7 @@ const userTokenBuilder = (userToken: SerializedUserToken): UserToken => {
 
 interface User {
   name: string;
+  username: string;
   expires: Date;
 }
 

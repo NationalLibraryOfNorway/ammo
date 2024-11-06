@@ -1,7 +1,7 @@
 'use client';
 
 import {Key, useEffect, useState} from 'react';
-import {approveItem, getItemImage, getItemMetadata} from '@/services/item.data';
+import {approveItem, deleteLock, getItemImage, getItemMetadata} from '@/services/item.data';
 import {Spinner} from '@nextui-org/spinner';
 import NextImage from 'next/image';
 import {CalendarDate, DatePicker, Image} from '@nextui-org/react';
@@ -49,13 +49,17 @@ export default function Page({params}: { params: { id: string } }) {
       } else {
         throw new Error(`Noe gikk galt ved godkjenning: ${res.status}`);
       }
-    }).then(() => {
-      router.push('/');
-    }).catch(e => {
-      if (e instanceof Error) {
-        alert(e.message);
-      }
-    });
+    })
+      .then(async () => {
+        await handleDeleteLock();
+      })
+      .then(() => {
+        router.push('/');
+      }).catch(e => {
+        if (e instanceof Error) {
+          alert(e.message);
+        }
+      });
   };
 
   useEffect(() => {
@@ -95,6 +99,16 @@ export default function Page({params}: { params: { id: string } }) {
       setValue('title', selectedTitle.name);
       setValue('titleId', selectedTitle.catalogueId);
     }
+  };
+
+  const handleDeleteLock = async () => {
+    await deleteLock(params.id).then(res => {
+      if (res.ok) {
+        router.push('/');
+      } else {
+        alert('Kunne ikke slette lås.');
+      }
+    });
   };
 
   return (
@@ -228,6 +242,11 @@ export default function Page({params}: { params: { id: string } }) {
                     isDisabled={isSubmitting}
                     startContent={isSubmitting && <Spinner className='ml-1' size='sm'/>}
                   >Godkjenn</Button>
+                  <Button
+                    variant="light"
+                    color="secondary"
+                    onClick={() => void handleDeleteLock()}
+                  >Avbryt</Button>
                 </form>
               </div>
             </div>

@@ -13,8 +13,12 @@ export function getRefreshToken(): string | undefined {
   return getUserToken()?.refreshToken;
 }
 
-export function getUserName(): string | undefined {
+export function getName(): string | undefined {
   return getUserToken()?.name;
+}
+
+export function getUsername(): string | undefined {
+  return getUserToken()?.username;
 }
 
 export function deleteUserToken() {

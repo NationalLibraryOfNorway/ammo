@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local dev files
 dummy-data.json
+
+# PVC k8s
+/db/ammo.db

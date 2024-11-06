@@ -22,3 +22,11 @@ spec:
             - name: app-port
               containerPort: 3000
           imagePullPolicy: Always
+          volumeMounts:
+            - name: ammo-sqlite
+              mountPath: /db
+      volumes:
+        - name: ammo-sqlite
+          persistentVolumeClaim:
+            claimName: ammo-pvc
+
