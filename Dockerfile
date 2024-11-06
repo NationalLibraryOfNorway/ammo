@@ -21,7 +21,6 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN npx prisma generate
-RUN npx prisma migrate deploy
 COPY prisma ./prisma/
 
 RUN npm run build
@@ -48,4 +47,4 @@ EXPOSE 3000
 ENV PORT=3000
 
 
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["node", "server.js"]
