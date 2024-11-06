@@ -77,22 +77,35 @@ export async function approveItem(id: string, item: NewspaperMetadata): Promise<
 }
 
 export async function lockItem(itemId: string, username: string): Promise<NextResponse> {
-  return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/lock`, {
-    method: 'POST',
-    body: JSON.stringify({itemId, username}),
+  return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/lock/${itemId}`, {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
-  })
-    .then(response => {
-      if (response.ok) {
-        return NextResponse.json({message: 'Item locked'}, {status: 201});
+  }).then(async res => {
+    if (res.ok) {
+      const lock = await res.json() as ItemLock;
+      if (lock.username === username) {
+        return NextResponse.json({message: 'Item already locked to current user'}, {status: 200});
       }
-      else if (response.status === 409) {
-        return NextResponse.json({error: 'Item already locked'}, {status: 409});
-      }
-      return NextResponse.json({error: 'Could not lock item'}, {status: 500});
-    });
+      return NextResponse.json({error: 'Item already locked'}, {status: 409});
+    } else if (res.status === 404) {
+      return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/lock`, {
+        method: 'POST',
+        body: JSON.stringify({itemId, username}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          if (response.ok) {
+            return NextResponse.json({message: 'Item locked'}, {status: 201});
+          }
+          return NextResponse.json({error: 'Could not lock item'}, {status: res.status});
+        });
+    }
+    return NextResponse.json({error: 'Could not lock item'}, {status: 500});
+  });
 }
 
 export async function getAllLocks(): Promise<NextResponse> {
@@ -110,5 +123,36 @@ export async function getAllLocks(): Promise<NextResponse> {
     })
     .catch((e: Error) => {
       return NextResponse.json({error: `Failed to fetch locks: ${e.message}`}, {status: 500});
+    });
+}
+
+export async function deleteLock(itemId: string): Promise<NextResponse> {
+  return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/lock/${itemId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(async res => {
+      if (res.ok) {
+        return await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH}/api/lock/${itemId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => {
+            if (response.ok) {
+              return NextResponse.json({status: 204});
+            }
+            return NextResponse.json({error: 'Failed to delete lock'}, {status: res.status});
+          })
+          .catch(() => {
+            return NextResponse.json({error: 'Failed to delete lock'}, {status: 500});
+          });
+      } else if (res.status === 404) {
+        return NextResponse.json({message: 'No lock found'}, {status: 200});
+      }
+      return NextResponse.json({error: 'Failed to delete lock'}, {status: 500});
     });
 }
