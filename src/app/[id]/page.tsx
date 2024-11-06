@@ -49,13 +49,17 @@ export default function Page({params}: { params: { id: string } }) {
       } else {
         throw new Error(`Noe gikk galt ved godkjenning: ${res.status}`);
       }
-    }).then(() => {
-      router.push('/');
-    }).catch(e => {
-      if (e instanceof Error) {
-        alert(e.message);
-      }
-    });
+    })
+      .then(async () => {
+        await handleDeleteLock();
+      })
+      .then(() => {
+        router.push('/');
+      }).catch(e => {
+        if (e instanceof Error) {
+          alert(e.message);
+        }
+      });
   };
 
   useEffect(() => {
@@ -97,7 +101,7 @@ export default function Page({params}: { params: { id: string } }) {
     }
   };
 
-  const handleCancel = async () => {
+  const handleDeleteLock = async () => {
     await deleteLock(params.id).then(res => {
       if (res.ok) {
         router.push('/');
@@ -241,7 +245,7 @@ export default function Page({params}: { params: { id: string } }) {
                   <Button
                     variant="light"
                     color="secondary"
-                    onClick={() => void handleCancel()}
+                    onClick={() => void handleDeleteLock()}
                   >Avbryt</Button>
                 </form>
               </div>
