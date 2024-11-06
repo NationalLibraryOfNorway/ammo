@@ -16,7 +16,6 @@ export async function GET(req: NextRequest, params: IdParams): Promise<NextRespo
 
 // Delete an item lock: DELETE /api/lock/:lockId
 export async function DELETE(req: NextRequest, params: IdParams): Promise<NextResponse> {
-  console.log('Deleting lock for item', params.params.id);
   await prisma.itemLock.delete({
     where: {
       itemId: params.params.id
