@@ -20,6 +20,10 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN npx prisma generate
+RUN npx prisma migrate deploy
+COPY prisma ./prisma/
+
 RUN npm run build
 
 FROM base AS runner
