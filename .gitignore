@@ -40,8 +40,5 @@ next-env.d.ts
 # IDE
 /.idea
 
-# local dev files
-dummy-data.json
-
 # PVC k8s
-/db/ammo.db
+/db/ammo.db*

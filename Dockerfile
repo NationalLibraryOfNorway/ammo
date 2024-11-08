@@ -21,9 +21,11 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
+# RUN mkdir -p /app/db
 RUN npx prisma generate
-RUN npx prisma migrate deploy
 COPY prisma ./prisma/
+# If the /app/db/ammo.db file does not exist, generate it.
+RUN test -f /app/db/ammo.db || npx prisma db push
 
 RUN npm run build
 
@@ -36,11 +38,14 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-RUN mkdir .next
+RUN mkdir .next && mkdir db
 RUN chown nextjs:nodejs .next
+RUN chown nextjs:nodejs db
+
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/db ./db
 
 USER nextjs
 
