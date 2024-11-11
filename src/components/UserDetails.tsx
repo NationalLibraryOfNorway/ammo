@@ -1,7 +1,7 @@
 'use client';
 
 import {User} from '@nextui-org/user';
-import {useEffect, useState} from 'react';
+import {FC} from 'react';
 import {Avatar} from '@nextui-org/avatar';
 
 interface UserDetailsProps {
@@ -9,13 +9,8 @@ interface UserDetailsProps {
   className?: string;
 }
 
-export const UserDetails: React.FC<UserDetailsProps> = ({ name, className }) => {
-  const [initials, setInitials] = useState<string>('');
-
-  useEffect(() => {
-    const tempInitials = name.split(' ').map(n => n[0]?.toUpperCase()).join('');
-    setInitials(tempInitials);
-  }, [name]);
+export const UserDetails: FC<UserDetailsProps> = ({ name, className }) => {
+  const initials = name.split(' ').map(n => n[0]?.toUpperCase()).join('');
 
   return (
     <div className={`${className}`}>
