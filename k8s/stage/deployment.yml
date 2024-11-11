@@ -24,7 +24,7 @@ spec:
           imagePullPolicy: Always
           volumeMounts:
             - name: ammo-sqlite
-              mountPath: /db
+              mountPath: /app/db
       volumes:
         - name: ammo-sqlite
           persistentVolumeClaim:
