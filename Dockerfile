@@ -21,11 +21,8 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# RUN mkdir -p /app/db
 RUN npx prisma generate
 COPY prisma ./prisma/
-# If the /app/db/ammo.db file does not exist, generate it.
-#RUN test -f /app/db/ammo.db || npx prisma db push
 
 RUN npm run build
 
