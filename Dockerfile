@@ -25,7 +25,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npx prisma generate
 COPY prisma ./prisma/
 # If the /app/db/ammo.db file does not exist, generate it.
-RUN test -f /app/db/ammo.db || npx prisma db push
+#RUN test -f /app/db/ammo.db || npx prisma db push
 
 RUN npm run build
 
@@ -34,6 +34,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN npm install prisma@5.21.1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -45,6 +47,7 @@ RUN chown nextjs:nodejs db
 
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/db ./db
 
 USER nextjs
@@ -53,5 +56,4 @@ EXPOSE 3000
 
 ENV PORT=3000
 
-
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["npm", "run", "start:production"]
