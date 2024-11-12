@@ -1,17 +1,17 @@
 'use client';
 
-import {AuthProvider} from '@/app/AuthProvider';
+import {AuthProvider} from '@/providers/AuthProvider';
 import {NextUIProvider} from '@nextui-org/react';
-import React from 'react';
+import {ReactNode, StrictMode} from 'react';
 
-export function Providers({children}: { children: React.ReactNode }) {
+export function Providers({children}: { children: ReactNode }) {
   return (
     <AuthProvider>
-      <React.StrictMode>
+      <StrictMode>
         <NextUIProvider locale='nb-NO'>
           {children}
         </NextUIProvider>
-      </React.StrictMode>
+      </StrictMode>
     </AuthProvider>
   );
 }

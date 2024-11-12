@@ -1,11 +1,11 @@
 'use client';
 
-import ItemThumbnail from '@/components/ItemThumbnail';
+import ItemThumbnail from '@/components/ui/ItemThumbnail';
 import {Spinner} from '@nextui-org/spinner';
 import {useEffect, useState} from 'react';
 import {ItemImage} from '@/models/ItemImage';
 import {getAllItems, getAllLocks, lockItem} from '@/services/item.data';
-import {useAuth} from '@/app/AuthProvider';
+import {useAuth} from '@/providers/AuthProvider';
 import {useRouter} from 'next/navigation';
 import {ItemLock} from '@prisma/client';
 

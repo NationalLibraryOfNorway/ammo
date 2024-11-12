@@ -2,7 +2,13 @@ import {ItemImage} from '@/models/ItemImage';
 import Image from 'next/image';
 import {LuLock} from 'react-icons/lu';
 
-export default function ItemThumbnail(props: {item: ItemImage; onItemClick: (id: string) => void; locked: boolean}) {
+interface ItemThumbnailProps {
+  item: ItemImage;
+  onItemClick: (id: string) => void;
+  locked: boolean;
+}
+
+export default function ItemThumbnail(props: ItemThumbnailProps) {
   return (
     <div
       className={`thumbnail-item ${props.locked ? 'cursor-default' : 'cursor-pointer hover:bg-gray-200'}`}

@@ -1,4 +1,4 @@
-import {useAuth} from '@/app/AuthProvider';
+import {useAuth} from '@/providers/AuthProvider';
 import {Button} from '@nextui-org/button';
 import {LuLogOut} from 'react-icons/lu';
 import {Tooltip} from '@nextui-org/tooltip';

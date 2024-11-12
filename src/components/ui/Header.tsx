@@ -1,32 +1,21 @@
 'use client';
 
 import {Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useRouter} from 'next/navigation';
-import LogoutButton from '@/components/LogoutButton';
-import {useAuth} from '@/app/AuthProvider';
-import {UserDetails} from '@/components/UserDetails';
+import LogoutButton from '@/components/ui/LogoutButton';
+import {useAuth} from '@/providers/AuthProvider';
+import {UserDetails} from '@/components/ui/UserDetails';
 import {Switch} from '@nextui-org/switch';
 import {LuMoon, LuSun} from 'react-icons/lu';
-import Logo from '@/components/Logo';
+import Logo from '@/components/ui/Logo';
+import {Theme, useTheme} from '@/providers/ThemeProvider';
+
 
 export default function Header() {
   const { authenticated , user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
-  const [theme, setTheme] = useState<'light' | 'dark'>();
-
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme) {
-      setTheme(storedTheme as 'light' | 'dark');
-      document.documentElement.classList.toggle('dark', theme === 'dark');
-    }
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
-  };
 
   return (
     <Navbar maxWidth='xl' className="sticky top-0 font-mono">
@@ -45,7 +34,7 @@ export default function Header() {
             defaultSelected
             size="lg"
             color="secondary"
-            isSelected={theme === 'dark'}
+            isSelected={theme === Theme.Dark}
             onValueChange={toggleTheme}
             thumbIcon={({ isSelected, className }) =>
               isSelected ? (
