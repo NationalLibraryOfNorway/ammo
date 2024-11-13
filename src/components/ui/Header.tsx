@@ -6,15 +6,12 @@ import {useRouter} from 'next/navigation';
 import LogoutButton from '@/components/ui/LogoutButton';
 import {useAuth} from '@/providers/AuthProvider';
 import {UserDetails} from '@/components/ui/UserDetails';
-import {Switch} from '@nextui-org/switch';
-import {LuMoon, LuSun} from 'react-icons/lu';
 import Logo from '@/components/ui/Logo';
-import {Theme, useTheme} from '@/providers/ThemeProvider';
+import {ThemeToggleButton} from '@/components/ui/ThemeToggleButton';
 
 
 export default function Header() {
   const { authenticated , user } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
 
   return (
@@ -29,21 +26,8 @@ export default function Header() {
         </Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem className="flex items-center">
-          <Switch
-            defaultSelected
-            size="lg"
-            color="secondary"
-            isSelected={theme === Theme.Dark}
-            onValueChange={toggleTheme}
-            thumbIcon={({ isSelected, className }) =>
-              isSelected ? (
-                <LuMoon className={className} />
-              ) : (
-                <LuSun className={className} />
-              )
-            }
-          />
+        <NavbarItem className="flex items-center gap-1">
+          <ThemeToggleButton />
           { authenticated ? (
             <>
               <UserDetails name={user?.name ?? ''}/>
