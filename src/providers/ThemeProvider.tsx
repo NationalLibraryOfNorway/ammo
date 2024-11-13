@@ -1,6 +1,6 @@
 'use client';
 
-import React, {createContext, ReactNode, useContext, useState} from 'react';
+import React, {createContext, ReactNode, useContext, useEffect, useState} from 'react';
 
 export enum Theme {
   Light = 'light',
@@ -8,7 +8,7 @@ export enum Theme {
 }
 
 interface IThemeContext {
-  theme: Theme;
+  theme?: Theme;
   toggleTheme: () => void;
 }
 
@@ -18,10 +18,13 @@ const ThemeContext = createContext<IThemeContext>({
 });
 
 export const ThemeProvider = ({ children }: {children: ReactNode}) => {
-  const [theme, setTheme] = useState(() => {
-    const storedTheme = typeof window !== 'undefined' ? localStorage?.getItem('theme') : null;
-    return storedTheme ? (storedTheme as Theme) : Theme.Light;
-  });
+  const [theme, setTheme] = useState<Theme>();
+
+  useEffect(() => {
+    const storedTheme = localStorage?.getItem('theme') as Theme;
+    const parsedTheme = storedTheme === Theme.Light ? Theme.Light : Theme.Dark;
+    setTheme(parsedTheme);
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === Theme.Light ? Theme.Dark : Theme.Light;

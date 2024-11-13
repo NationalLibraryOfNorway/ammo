@@ -1,8 +1,9 @@
-import {Theme} from '@/providers/ThemeProvider';
+import {Theme, useTheme} from '@/providers/ThemeProvider';
 
-export default function Logo(props: { className: string; appearance: Theme }) {
+export default function Logo(props: { className: string }) {
+  const { theme } = useTheme();
 
-  const color = props.appearance === Theme.Light ? '#000' : '#fff';
+  const color = theme === Theme.Light ? '#000' : '#fff';
 
   // SVG generated using google-font-to-svg-path: https://danmarshall.github.io/google-font-to-svg-path/
   return (
