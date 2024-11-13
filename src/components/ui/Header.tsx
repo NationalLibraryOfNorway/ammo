@@ -11,7 +11,7 @@ import {ThemeToggleButton} from '@/components/ui/ThemeToggleButton';
 
 
 export default function Header() {
-  const { authenticated , user } = useAuth();
+  const { authenticated } = useAuth();
   const router = useRouter();
 
   return (
@@ -30,7 +30,7 @@ export default function Header() {
           <ThemeToggleButton />
           { authenticated ? (
             <>
-              <UserDetails name={user?.name ?? ''}/>
+              <UserDetails />
               <LogoutButton className="pl-2.5"/>
             </>
           ) : <></>}
