@@ -40,8 +40,11 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (!user) {
+      return;
+    }
     void getItems();
-  }, []);
+  }, [user]);
 
   const handleItemClicked = async (id: string) => {
     if (!user) {
