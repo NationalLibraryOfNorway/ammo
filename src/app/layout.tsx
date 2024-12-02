@@ -1,7 +1,10 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import {Providers} from '@/app/providers';
-import Header from '@/components/Header';
+import Header from '@/components/ui/Header';
+import {ReactNode} from 'react';
+import {ThemeLayout} from '@/components/layouts/ThemeLayout';
+import {ThemeProvider} from '@/providers/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'AMMO',
@@ -11,11 +14,11 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <ThemeProvider>
+      <ThemeLayout>
         <Providers>
           <main>
             <div className="min-h-screen flex flex-col text-center">
@@ -29,7 +32,8 @@ export default function RootLayout({
             </div>
           </main>
         </Providers>
-      </body>
-    </html>
+      </ThemeLayout>
+    </ThemeProvider>
+
   );
 }
