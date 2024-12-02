@@ -28,12 +28,12 @@ export default function Header() {
       <NavbarContent justify="end">
         <NavbarItem className="flex items-center gap-1">
           <ThemeToggleButton />
-          { authenticated ? (
+          { authenticated && (
             <>
               <UserDetails />
               <LogoutButton className="pl-2.5"/>
             </>
-          ) : <></>}
+          )}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
