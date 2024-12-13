@@ -1,6 +1,6 @@
 'use client';
 
-import {createContext, useCallback, useContext, useEffect, useState} from 'react';
+import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
 import keycloakConfig from '@/lib/keycloak';
 import {User} from '@/models/UserToken';
@@ -17,7 +17,7 @@ const AuthContext = createContext<IAuthContext>({
   logout: () => {}
 });
 
-export const AuthProvider = ({children}: { children: React.ReactNode }) => {
+export const AuthProvider = ({children}: { children: ReactNode }) => {
   const router = useRouter();
 
   const [authenticated, setAuthenticated] = useState<boolean>(false);
@@ -71,12 +71,10 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     return refresh();
   }, []);
 
-  const setIntervalToRefreshAccessToken = useCallback(async () => {
+  const setIntervalToRefreshAccessToken = useCallback(() => {
     if (user?.expires && !intervalId) {
       const expiryTime = new Date(user?.expires).getTime() - Date.now();
-      if (expiryTime < 1000 * 60 * 4.75) {
-        await refreshToken();
-      }
+
       setIntervalId(window.setInterval(() => {
         void refreshToken().then((newUser: User) => {
           handleIsAuthenticated(newUser);
@@ -85,7 +83,7 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
             console.error('Failed to refresh token: ', e.message);
             handleNotAuthenticated();
           });
-      }, (1000 * 60 * 4.75))); // Refresh every 4.75 minutes (fifteen seconds before expiry)
+      }, (expiryTime - 15 * 1000))); // Refresh token 15 seconds before expiry
     }
   }, [handleNotAuthenticated, intervalId, refreshToken, user?.expires]);
 
