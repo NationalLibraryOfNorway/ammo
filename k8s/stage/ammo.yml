@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ammo-deployment
+  name: ammo
   labels:
     app: ammo
   namespace: tekst-stage
@@ -22,13 +22,6 @@ spec:
             - name: app-port
               containerPort: 3000
           imagePullPolicy: Always
-          volumeMounts:
-            - name: ammo-sqlite
-              mountPath: /app/db
-      volumes:
-        - name: ammo-sqlite
-          persistentVolumeClaim:
-            claimName: ammo-pvc
 
 ---
 
