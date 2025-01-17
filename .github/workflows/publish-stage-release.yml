@@ -4,13 +4,40 @@ on:
       - "**" # TODO: Change to main before merging (main)
 
 jobs:
+  pack-env-json:
+    name: Pack env.json
+    runs-on: self-hosted-linux
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch secrets from Vault
+        uses: hashicorp/vault-action@v3
+        with:
+          url: ${{ secrets.VAULT_URL }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          secrets: |
+            ${{ secrets.VAULT_SECRET_PATH }}/ammo-stage * ;
+            ${{ secrets.VAULT_SECRET_PATH }}/keycloak-nbauth-tekst * | NEXT_PUBLIC_ ;
+
+      - name: Write and encode environment variables
+        id: encode-env
+        run: |
+          echo "${{ toJson(steps.import-secrets.outputs) }}" >> env.json
+          ENV_CONTENT=$(jq -r 'to_entries[] | .key + "=" + .value' env.json)
+          ENCODED_ENV=$(echo "$ENV_CONTENT" | base64 -w 0)
+          echo "encoded=$ENCODED_ENV" >> "$GITHUB_OUTPUT"
+          
+
   build-and-deploy:
-    uses: NationalLibraryOfNorway/tekst-workflows/.github/workflows/node-build-and-deploy.yml@main
+    uses: NationalLibraryOfNorway/tekst-workflows/.github/workflows/node-build-and-deploy.yml@feat/set-dotenv-file
     with:
       ENVIRONMENT: "stage"
-      NODE_VERSION: "20.18.1"
-      SET_ENV: true
+      NODE_VERSION: "20.17.0"
       BUILD_OUTPUT_PATH: ".next"
+      ENV_VARS_BASE64: ${{ steps.pack-env-json.outputs.encode-env }}
     secrets:
       VAULT_URL: ${{ secrets.VAULT_URL }}
       VAULT_SECRET_PATH: ${{ secrets.VAULT_SECRET_PATH }}
