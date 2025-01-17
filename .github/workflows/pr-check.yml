@@ -1,10 +1,10 @@
 on:
   push:
     branches:
-      - "main" # TODO: fix this before merging ("**")
-#  pull_request:
-#    branches:
-#      - "main"
+      - "**"
+  pull_request:
+    branches:
+      - "main"
 
 jobs:
   node_pull_request_check:

@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - "**" # TODO: Change to main before merging (main)
+      - "main"
 
 jobs:
   build-and-deploy:
