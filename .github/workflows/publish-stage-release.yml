@@ -33,6 +33,7 @@ jobs:
 
   build-and-deploy:
     uses: NationalLibraryOfNorway/tekst-workflows/.github/workflows/node-build-and-deploy.yml@feat/set-dotenv-file
+    needs: pack-env-json
     with:
       ENVIRONMENT: "stage"
       NODE_VERSION: "20.17.0"
