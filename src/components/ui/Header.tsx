@@ -1,6 +1,6 @@
 'use client';
 
-import {Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@nextui-org/react';
+import {Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from '@heroui/react';
 import React from 'react';
 import {useRouter} from 'next/navigation';
 import LogoutButton from '@/components/ui/LogoutButton';
