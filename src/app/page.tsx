@@ -1,7 +1,7 @@
 'use client';
 
 import ItemThumbnail from '@/components/ui/ItemThumbnail';
-import {Spinner} from '@nextui-org/spinner';
+import {Spinner} from '@heroui/spinner';
 import {useEffect, useState} from 'react';
 import {ItemImage} from '@/models/ItemImage';
 import {getAllItems, getAllLocks, lockItem} from '@/services/item.data';

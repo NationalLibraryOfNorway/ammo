@@ -1,4 +1,4 @@
-import {Autocomplete, AutocompleteItem} from '@nextui-org/autocomplete';
+import {Autocomplete, AutocompleteItem} from '@heroui/autocomplete';
 import {CatalogTitle} from '@/models/CatalogTitle';
 import {Key} from 'react';
 import {useAsyncList} from '@react-stately/data';

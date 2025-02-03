@@ -1,5 +1,5 @@
 import NextImage from 'next/image';
-import {Image} from '@nextui-org/react';
+import {Image} from '@heroui/react';
 
 export const ImageContainer = (props: {src: string}) => {
   return (

@@ -1,8 +1,8 @@
 'use client';
 
-import {User} from '@nextui-org/user';
+import {User} from '@heroui/user';
 import {FC} from 'react';
-import {Avatar} from '@nextui-org/avatar';
+import {Avatar} from '@heroui/avatar';
 import {useAuth} from '@/providers/AuthProvider';
 
 interface UserDetailsProps {
