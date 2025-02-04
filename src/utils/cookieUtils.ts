@@ -1,32 +1,28 @@
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
+import { cookies } from 'next/headers';
 import {SerializedUserToken, UserToken, userTokenBuilder} from '@/models/UserToken';
 
-export function getUserToken(): UserToken | undefined {
-  const userCookieValue = (cookies() as unknown as UnsafeUnwrappedCookies).get('user')?.value;
+export async function getUserToken(): Promise<UserToken> {
+  const cookieStore = await cookies();
+  const userCookieValue = cookieStore.get('user')?.value;
+
   if (!userCookieValue) {
-    return undefined;
+    return Promise.reject(new Error('No user token found'));
   }
   return userTokenBuilder(JSON.parse(userCookieValue) as SerializedUserToken);
 }
 
-export function getRefreshToken(): string | undefined {
-  return getUserToken()?.refreshToken;
+export async function getRefreshToken(): Promise<string> {
+  return await getUserToken().then(user => user.refreshToken);
 }
 
-export function getName(): string | undefined {
-  return getUserToken()?.name;
+export async function deleteUserToken() {
+  const cookieStore = await cookies();
+  cookieStore.delete('user');
 }
 
-export function getUsername(): string | undefined {
-  return getUserToken()?.username;
-}
-
-export function deleteUserToken() {
-  (cookies() as unknown as UnsafeUnwrappedCookies).delete('user');
-}
-
-export function setUserCookie(user: UserToken) {
-  (cookies() as unknown as UnsafeUnwrappedCookies).set('user', JSON.stringify(user), {
+export async function setUserCookie(user: UserToken) {
+  const cookieStore = await cookies();
+  cookieStore.set('user', JSON.stringify(user), {
     httpOnly: true,
     secure: true,
     sameSite: 'lax',

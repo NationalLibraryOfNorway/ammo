@@ -8,18 +8,21 @@ const requiredRoles = ['T_relation_avis']; // TODO: Fiks rolle når den er oppre
 export default function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtected = protectedPaths.some(protectedPath => path.includes(protectedPath));
-  const userToken = getUserToken();
-  const authorized = isAuthorized(userToken);
 
-  if (!isProtected) {
-    return NextResponse.next();
-  }
+  getUserToken().then(userToken => {
+    if (!isProtected) {
+      return NextResponse.next();
+    }
 
-  if (isProtected && authorized) {
-    return NextResponse.next();
-  }
+    if (isProtected && isAuthorized(userToken)) {
+      return NextResponse.next();
+    }
 
-  return NextResponse.json({error: 'Unauthorized'}, {status: 401});
+    return NextResponse.json({error: 'Unauthorized'}, {status: 401});
+  })
+    .catch(() => {
+      return NextResponse.json({error: 'Unauthorized'}, {status: 401});
+    });
 }
 
 function isAuthorized(token?: UserToken) {
