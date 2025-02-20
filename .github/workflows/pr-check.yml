@@ -11,7 +11,6 @@ jobs:
     name: Node pull request check
     uses: NationalLibraryOfNorway/tekst-workflows/.github/workflows/node-check.yml@main
     with:
-      CLUSTER_NAME: "k8s"
       ENVIRONMENT: "stage"
       NODE_VERSION: "20.17.0"
       SET_ENV: true
