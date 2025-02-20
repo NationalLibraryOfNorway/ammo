@@ -16,12 +16,12 @@ cp .env.example .env.local
 | NEXT_PUBLIC_IMAGE_API_PATH     | _N/A_                        | Sti til bilde-APIet                                                                                                      |
 | AUTH_API_PATH                  | _N/A_                        | Sti til autentiserings-APIet                                                                                             |
 | CATALOG_API_PATH               | http://localhost:8087/bikube | Sti til [katalog APIet ](https://github.com/NationalLibraryOfNorway/bikube)<br/>Må starte med `http://` eller `https://` |
-| DATABASE_URL                   | file:../db/ammo.db           | Sti til databasefil (SQLite database)                                                                                    |
+| DATABASE_URL                   | _N/A_                        | Sti til database                                                                                                         |
 
-Appen bruker SQLite for å holde orden på hvilke objekter som er låst til ulike brukere.
+Appen bruker Postgres som database for å holde orden på hvilke objekter som er låst til ulike brukere.
 AMMO bruker Prisma som ORM for å kommunisere med databasen.
-For å få dette opp å kjøre bruker man `prisma db pull` for å lage nytt schema.prisma,
-og `prisma generate` for å laste skjemaet inn i prisma klienten.
+For å hente eventuelle endringer i databaseskjemaet kan man kjøre `prisma db pull`,
+og `prisma generate` for å laste skjema inn i prisma-klienten. DATABASE_URL må være satt i `.env` for at dette skal fungere.
 
 
 Deretter må du kjøre følgende kommandoer:
