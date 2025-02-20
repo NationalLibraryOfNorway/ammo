@@ -7,6 +7,7 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "test": "echo 'Ammo tests not yet implemented'",
+    "test:ci": "echo 'Ammo tests not yet implemented'",
     "lint": "next lint"
   },
   "dependencies": {
