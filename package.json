@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
+    "build:stage": "prisma generate && next build",
+    "build:prod": "prisma generate && next build",
     "start": "next start",
     "test": "echo 'Ammo tests not yet implemented'",
     "test:ci": "echo 'Ammo tests not yet implemented'",
