@@ -5,10 +5,10 @@ import {UserToken} from '@/models/UserToken';
 const protectedPaths: string[] = ['/api/items'];
 const requiredRoles = ['T_relation_avis']; // TODO: Fiks rolle når den er opprettet
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
   const isProtected = protectedPaths.some(protectedPath => path.includes(protectedPath));
-  const userToken = getUserToken();
+  const userToken = await getUserToken();
   const authorized = isAuthorized(userToken);
 
   if (!isProtected) {
