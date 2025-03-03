@@ -1,8 +1,8 @@
-import {cookies} from 'next/headers';
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import {SerializedUserToken, UserToken, userTokenBuilder} from '@/models/UserToken';
 
 export function getUserToken(): UserToken | undefined {
-  const userCookieValue = cookies().get('user')?.value;
+  const userCookieValue = (cookies() as unknown as UnsafeUnwrappedCookies).get('user')?.value;
   if (!userCookieValue) {
     return undefined;
   }
@@ -22,11 +22,11 @@ export function getUsername(): string | undefined {
 }
 
 export function deleteUserToken() {
-  cookies().delete('user');
+  (cookies() as unknown as UnsafeUnwrappedCookies).delete('user');
 }
 
 export function setUserCookie(user: UserToken) {
-  cookies().set('user', JSON.stringify(user), {
+  (cookies() as unknown as UnsafeUnwrappedCookies).set('user', JSON.stringify(user), {
     httpOnly: true,
     secure: true,
     sameSite: 'lax',
