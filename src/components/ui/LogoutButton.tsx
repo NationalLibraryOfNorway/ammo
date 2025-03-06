@@ -1,7 +1,7 @@
 import {useAuth} from '@/providers/AuthProvider';
-import {Button} from '@nextui-org/button';
+import {Button} from '@heroui/button';
 import {LuLogOut} from 'react-icons/lu';
-import {Tooltip} from '@nextui-org/tooltip';
+import {Tooltip} from '@heroui/tooltip';
 
 const LogoutButton = ({className}: {className?: string}) => {
   const { logout } = useAuth();

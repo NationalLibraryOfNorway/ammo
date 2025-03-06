@@ -1,7 +1,7 @@
 'use client';
 
 import {useEffect, useState} from 'react';
-import {Spinner} from '@nextui-org/spinner';
+import {Spinner} from '@heroui/spinner';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {MetadataForm} from '@/features/metadata-form';
 import {getItemImage, getItemMetadata} from '@/services/item.data';

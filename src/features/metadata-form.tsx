@@ -1,9 +1,9 @@
-import {CalendarDate, DatePicker} from '@nextui-org/react';
+import {CalendarDate, DatePicker} from '@heroui/react';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
-import {Input} from '@nextui-org/input';
+import {Input} from '@heroui/input';
 import {parseDate, today} from '@internationalized/date';
-import {Button} from '@nextui-org/button';
-import {Spinner} from '@nextui-org/spinner';
+import {Button} from '@heroui/button';
+import {Spinner} from '@heroui/spinner';
 import {useEffect, useState} from 'react';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {useRouter} from 'next/navigation';
