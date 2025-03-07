@@ -3,7 +3,7 @@ import {deleteUserToken, getRefreshToken} from '@/utils/cookieUtils';
 
 // POST api/auth/signout
 export async function POST(): Promise<NextResponse> {
-  const refreshToken = getRefreshToken();
+  const refreshToken = await getRefreshToken();
   if (!refreshToken) {
     return NextResponse.json({error: 'No user token found'}, {status: 401});
   }
@@ -14,11 +14,11 @@ export async function POST(): Promise<NextResponse> {
       'Content-Type': 'application/json'
     },
     body: refreshToken
-  }).then(res => {
+  }).then(async res => {
     if (!res.ok) {
       return NextResponse.json({error: 'Failed to logout'}, {status: res.status});
     }
-    deleteUserToken();
+    await deleteUserToken();
     return NextResponse.json({message: 'Logged out successfully'}, {status: 200});
   }).catch((error: Error) => {
     return NextResponse.json({error: `Failed to logout: ${error.message}`}, {status: 500});

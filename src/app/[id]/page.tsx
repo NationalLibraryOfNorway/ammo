@@ -1,13 +1,14 @@
 'use client';
 
-import {useEffect, useState} from 'react';
+import { useEffect, useState, use } from 'react';
 import {Spinner} from '@heroui/spinner';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {MetadataForm} from '@/features/metadata-form';
 import {getItemImage, getItemMetadata} from '@/services/item.data';
 import {ImageContainer} from '@/components/ui/ImageContainer';
 
-export default function Page({params}: { params: { id: string } }) {
+export default function Page(props: { params: Promise<{ id: string }> }) {
+  const params = use(props.params);
   const [imageSrc, setImageSrc] = useState<string>();
   const [extractedMetadata, setExtractedMetadata] = useState<NewspaperMetadata>();
 

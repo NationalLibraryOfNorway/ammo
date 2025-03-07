@@ -36,7 +36,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({error: 'Failed to authenticate'}, {status: 500});
   }
 
-  setUserCookie(userToken);
+  await setUserCookie(userToken);
 
   const user: User = {name: userToken.name, expires: userToken.expires, username: userToken.username};
   return NextResponse.json(user, {status: 200});
