@@ -1,10 +1,10 @@
 import {NextRequest, NextResponse} from 'next/server';
 import prisma from '@/lib/prisma';
 
-interface IdParams { params: { id: string} }
+interface IdParams { params: Promise<{ id: string}> }
 
 export async function GET(req: NextRequest, params: IdParams): Promise<NextResponse> {
-  const itemId = params.params.id;
+  const itemId = (await params.params).id;
   const item = await prisma.itemLock.findUnique({ where: {itemId} });
 
   if (!item) {
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, params: IdParams): Promise<NextRespo
 export async function DELETE(req: NextRequest, params: IdParams): Promise<NextResponse> {
   await prisma.itemLock.delete({
     where: {
-      itemId: params.params.id
+      itemId: (await params.params).id
     }
   });
 

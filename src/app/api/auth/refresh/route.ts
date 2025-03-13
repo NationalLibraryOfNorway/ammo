@@ -4,7 +4,7 @@ import {getRefreshToken, setUserCookie} from '@/utils/cookieUtils';
 
 // POST api/auth/refresh
 export async function POST(): Promise<NextResponse> {
-  const refreshToken = getRefreshToken();
+  const refreshToken = await getRefreshToken();
   if (!refreshToken) {
     return NextResponse.json({error: 'No user token found'}, {status: 401});
   }
@@ -23,7 +23,7 @@ export async function POST(): Promise<NextResponse> {
     return NextResponse.json({error: 'Failed to refresh token'}, {status: 500});
   }
 
-  setUserCookie(newToken);
+  await setUserCookie(newToken);
 
   const user: User = {name: newToken.name, expires: newToken.expires, username: newToken.username};
   return NextResponse.json(user, {status: 200});
