@@ -46,6 +46,7 @@ metadata:
   name: ammo-ingress
   namespace: tekst-stage
 spec:
+  ingressClassName: nginx
   rules:
     - host: <host_url>
       http:
