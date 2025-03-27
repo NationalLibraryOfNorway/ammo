@@ -4,7 +4,7 @@ import {createContext, ReactNode, useCallback, useContext, useEffect, useState} 
 import {useRouter} from 'next/navigation';
 import keycloakConfig from '@/lib/keycloak';
 import {User} from '@/models/UserToken';
-import {refresh, signIn, signOut} from '@/services/auth.data';
+import {signIn, signOut, refresh} from '@/actions/auth';
 
 interface IAuthContext {
   authenticated: boolean;
