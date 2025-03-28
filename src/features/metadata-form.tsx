@@ -7,9 +7,10 @@ import {Spinner} from '@heroui/spinner';
 import {useEffect, useState} from 'react';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {useRouter} from 'next/navigation';
-import {approveItem, deleteLock} from '@/services/item.data';
 import {CatalogTitle} from '@/models/CatalogTitle';
 import {TitleSearchAutocomplete} from '@/components/ui/TitleSearchAutocomplete';
+import {approveItem} from '@/actions/items';
+import {unlockItem} from '@/actions/locks';
 
 interface NewspaperFormInput {
   title: string;
@@ -41,15 +42,11 @@ export const MetadataForm = (props: MetadataFormProps) => {
       editionNumber: data.editionNumber,
       volume: data.volume
     };
-    void approveItem(props.id, metadata).then(res => {
-      if (res.ok) {
-        router.push('/');
-      } else {
-        throw new Error(`Noe gikk galt ved godkjenning: ${res.status}`);
-      }
+    void approveItem(props.id, metadata).then(() => {
+      router.push('/');
     })
       .then(async () => {
-        await handleDeleteLock();
+        await handleUnlockItem();
       })
       .then(() => {
         router.push('/');
@@ -76,13 +73,14 @@ export const MetadataForm = (props: MetadataFormProps) => {
     }
   };
 
-  const handleDeleteLock = async () => {
-    await deleteLock(props.id).then(res => {
-      if (res.ok) {
-        router.push('/');
-      } else {
-        alert('Kunne ikke slette lås.');
-      }
+  const handleUnlockItem = async () => {
+    await unlockItem(props.id).then(() => {
+      router.push('/');
+      // if (res.ok) {
+      //   router.push('/');
+      // } else {
+      //   alert('Kunne ikke slette lås.');
+      // }
     });
   };
 
@@ -170,7 +168,7 @@ export const MetadataForm = (props: MetadataFormProps) => {
         <Button
           variant="light"
           color="secondary"
-          onClick={() => void handleDeleteLock()}
+          onClick={() => void handleUnlockItem()}
         >Avbryt</Button>
       </form>
     </div>

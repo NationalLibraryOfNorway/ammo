@@ -4,8 +4,8 @@ import { useEffect, useState, use } from 'react';
 import {Spinner} from '@heroui/spinner';
 import {NewspaperMetadata} from '@/models/NewspaperMetadata';
 import {MetadataForm} from '@/features/metadata-form';
-import {getItemImage, getItemMetadata} from '@/services/item.data';
 import {ImageContainer} from '@/components/ui/ImageContainer';
+import {getItem, getItemImage} from '@/actions/items';
 
 export default function Page(props: { params: Promise<{ id: string }> }) {
   const params = use(props.params);
@@ -13,17 +13,15 @@ export default function Page(props: { params: Promise<{ id: string }> }) {
   const [extractedMetadata, setExtractedMetadata] = useState<NewspaperMetadata>();
 
   useEffect(() => {
-    const getItem = async () => {
-      await getItemImage(params.id).then(async res => {
-        const data = await res.json() as string;
-        setImageSrc(data);
+    const getItemMetadata = async () => {
+      await getItemImage(params.id).then(imageUrl => {
+        setImageSrc(imageUrl);
       });
-      await getItemMetadata(params.id).then(async res => {
-        const data = await res.json() as NewspaperMetadata;
-        setExtractedMetadata(data);
+      await getItem(params.id).then(item => {
+        setExtractedMetadata(item.extractedMetadata);
       });
     };
-    void getItem();
+    void getItemMetadata();
   }, [params.id]);
 
   return (
