@@ -4,10 +4,11 @@ import ItemThumbnail from '@/components/ui/ItemThumbnail';
 import {Spinner} from '@heroui/spinner';
 import {useEffect, useState} from 'react';
 import {ItemImage} from '@/models/ItemImage';
-import {getAllItems, getAllLocks, lockItem} from '@/services/item.data';
 import {useAuth} from '@/providers/AuthProvider';
 import {useRouter} from 'next/navigation';
 import {ItemLock} from '@prisma/client';
+import {getAllLocks, lockItem} from '@/actions/locks';
+import {getAllItemThumbnails} from '@/actions/items';
 
 export default function Home() {
   const [items, setItems] = useState<ItemImage[]>([]);
@@ -16,15 +17,13 @@ export default function Home() {
   const {user} = useAuth();
 
   const getItems = async () => {
-    await getAllItems()
+    await getAllItemThumbnails()
       .then((res: ItemImage[]) => {
         setItems(res);
         return res;
       })
       .then(async fetchedItems => {
-        await getAllLocks().then(async res => {
-          const locks = await res.json() as {itemId: string; username: string}[];
-
+        await getAllLocks().then(locks => {
           const newItems = fetchedItems.map(item => {
             const lock = locks.find(l => l.itemId === item.id);
             return {...item, lock};
@@ -50,12 +49,8 @@ export default function Home() {
     if (!user) {
       return Promise.reject(new Error('User not authenticated'));
     }
-    await lockItem(id, user?.username).then(res => {
-      if (res.ok) {
-        router.push(`/${id}`);
-      } else {
-        alert('Could not lock item');
-      }
+    await lockItem(id).then(() => {
+      router.push(`/${id}`);
     });
   };
 

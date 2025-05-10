@@ -4,7 +4,7 @@ import {createContext, ReactNode, useCallback, useContext, useEffect, useState} 
 import {useRouter} from 'next/navigation';
 import keycloakConfig from '@/lib/keycloak';
 import {User} from '@/models/UserToken';
-import {refresh, signIn, signOut} from '@/services/auth.data';
+import {signIn, signOut, refresh} from '@/actions/auth';
 
 interface IAuthContext {
   authenticated: boolean;
@@ -32,7 +32,7 @@ export const AuthProvider = ({children}: { children: ReactNode }) => {
     }
     let currentUrl = window.location.href;
     // The app dislikes being redirected to a sub-path, redirecting to root to avoid issues
-    currentUrl = currentUrl.replace(/\/ammo.*/, '/ammo');
+    // currentUrl = currentUrl.replace(/\/ammo.*/, '/ammo');
     currentUrl = encodeURIComponent(currentUrl);
 
     window.location.assign(`${keycloakConfig.url}/realms/${keycloakConfig.realm}/protocol/openid-connect/auth` +
